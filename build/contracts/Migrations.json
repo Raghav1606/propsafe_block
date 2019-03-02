@@ -1383,12 +1383,12 @@
     "666": {
       "events": {},
       "links": {},
-      "address": "0x4e5b24048a8D9f0a31995CFe7606289936C4fd52",
-      "transactionHash": "0x4f8d539da0008223b89c6520ad3ee136f55fdad39b3a055390272f9fda853b74"
+      "address": "0x6115860cb10A199F1ac489d24f681156F43C9B44",
+      "transactionHash": "0x713ceeb699d182d1ebe5c474334c1cc9202f707e9eae94ae034e861abb61ffae"
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-28T15:13:31.984Z",
+  "updatedAt": "2019-03-02T05:30:18.237Z",
   "devdoc": {
     "methods": {}
   },

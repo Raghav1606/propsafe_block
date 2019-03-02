@@ -454,12 +454,12 @@
     "666": {
       "events": {},
       "links": {},
-      "address": "0x49392768a6f3F88df7cf65D54B772f9ee856D68C",
-      "transactionHash": "0x979ddfd5bfccf3b653cdc98937ebf22a4b0fb582527987936518b2ea9a682c19"
+      "address": "0x11BB182c4dE61035d480AA13D98C3FB340556aeB",
+      "transactionHash": "0x83df9b153d78eb2bafaa22e2a0ebc93f2c19b84b9105d3a01700e410a034b11e"
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-28T15:13:31.982Z",
+  "updatedAt": "2019-03-02T05:30:18.236Z",
   "devdoc": {
     "methods": {}
   },

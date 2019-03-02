@@ -17,6 +17,24 @@ $(document).ready(() => {
 
         window.location.href = "/search_registry"
     });
+    
+    
+    $('#validate_trans').click(function () {
+    selectedAccount = $('#options').val();
+    console.log(selectedAccount);
+      console.log("HI");
+      
+      var selectedAccount = 0xfb01b6be238450b81da93a484181026821441964;
+    $.post('/setValidator', {account : selectedAccount}, function (response) {
+        console.log("done hai :)"+response);
+
+    })  
+      
+  })
+    
+    
+    
+    
 
 
 });
