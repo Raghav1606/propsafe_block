@@ -17,7 +17,7 @@ contract MetaCoin {
    
    
    
-   //----------------------------------------
+   //----------------------------------------ACCESS CONTROL
    
        address owner;
     mapping(address => bool) validators;
@@ -133,7 +133,7 @@ contract MetaCoin {
     
     
     
-    
+    /*
  	mapping (address => uint) balances;
 
 	event Transfer(address indexed _from, address indexed _to, uint256 _value);
@@ -157,7 +157,7 @@ contract MetaCoin {
 
 	function getBalance(address addr) public view returns(uint) {
 		return balances[addr];
-	}
+	}*/
 
 
 
