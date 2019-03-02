@@ -177,6 +177,7 @@ contract MetaCoin {
         string current_status;
         string address;
         uint area;
+        uint[] registration_number;
     }
     
     
