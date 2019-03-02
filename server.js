@@ -14,6 +14,8 @@ app.use('/search_registry', express.static(__dirname + '/public_static/admin/sea
 app.use('/start_trans', express.static(__dirname + '/public_static/admin/start_trans.html'))
 app.use('/pending_trans', express.static(__dirname + '/public_static/admin/pending_trans.html'));
 app.use('/validate_or_not', express.static(__dirname + '/public_static/admin/validate_or_not.html'));
+app.use('/validate_opage', express.static(__dirname + '/public_static/admin/validate_or_not.html'));
+
 
 
 const port = 4000 || process.env.PORT;
