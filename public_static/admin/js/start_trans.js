@@ -40,7 +40,7 @@ $(document).ready(() => {
             data1.seller_id=$("#Seller_id").val();
             data1.status=$("#Status").val();
 
-
+            alert(data1);
             $.ajax({
                         url: '/api/transactions/addNewTrans',
 
@@ -49,9 +49,9 @@ $(document).ready(() => {
                     }).done(function (msg) {
                         if(msg==="success")
                         {
-                            $.get( "/api/validate/validate_trans", data1 )
-                                .done(function( data ) {
-
+                            $.get( "/api/validate/validate_trans", data1 ).done(function( data ) {
+                                    
+                                    
                                     window.location.href="/validate_page"+"&data="+data;
                                     
                                 });
