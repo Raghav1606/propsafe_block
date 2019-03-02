@@ -34,13 +34,20 @@ app.use(bodyParser.json());
 
 app.get('/getAccounts', (req, res) => {
  console.log("**** GET /getAccounts lalalalal****");
- let currentAcount = req.body.account;
+ let currentAcount = req.query.account;
+    console.log(currentAcount+"ACCOUNT");
  truffle_connect.start(currentAcount, (answer) =>{
-    
+     
      accounts = answer;
      console.log(accounts);
-   res.send(answer);
- })
+     truffle_connect.setValidator( (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+ });
+    
+ 
+    
 });
 
 
@@ -51,8 +58,7 @@ app.get('/getAccounts', (req, res) => {
 app.post('/setValidator', (req, res) => {
   console.log("**** SetValidator val ****");
   console.log(req.body);
-  let currentAcount = accounts[req.body.account];
-  truffle_connect.setValidator(currentAcount, (answer) => {
+  truffle_connect.setValidator( (answer) => {
     console.log(answer+"OKOKOK");
       res.send(answer);
   });

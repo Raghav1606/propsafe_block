@@ -31,7 +31,9 @@ module.exports = {
       }
       self.accounts = accs;
       self.account = self.accounts[2];
-      sender = accounts[selected];    
+        console.log(selected+"\n"+accs);
+      sender = self.accounts[selected]; 
+      console.log(sender);
       callback(self.accounts);
     });
       //don't see this till here
@@ -39,16 +41,16 @@ module.exports = {
     
   
     
-    setValidator: function(account, callback) { //gets the selected account 
+    setValidator: function(callback) { //gets the selected account 
     var self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
     MetaCoin.setProvider(self.web3.currentProvider);
-
+        console.log("app: setValidator: "+sender);
     var meta;
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
-      return meta.setValidator.call(account, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+      return meta.setValidator.call(sender, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {

@@ -9,7 +9,7 @@ route.post('/email_pass', function (req, res) {
         console.log(data);
         if(data[1].rowCount === 1)
         {
-            console.log("HEY");
+            console.log("Login govt success");
             res.send("Successful Login");
         }
         else

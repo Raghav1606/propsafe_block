@@ -30,7 +30,47 @@ $(document).ready(() => {
         else
         {
             console.log("Reached");
+            
+             $.post('/api/login_govt/email_pass',{email: $('#email').val(),pass: $('#pass').val()},function (res) {
+                //writeCookie("govt",$('#email').val(),10);
+                 
+                if(res === "Successful Login"){
+                    var ethu_id = 1;//////////////fetch from database
+                    $.get('/getAccounts',{account : ethu_id}, function (res) {
+                       // alert("try"+res);
+                        
+                    });
+                    
+                    window.location.href="/start_trans";
+                }else
+                    alert("Failed");
+                 
+            });
+            /*$.ajax({
+                url: '/api/login_govt/email_pass',
+                data: {
+                    email: $('#email').val(),
+                    pass: $('#pass').val()
 
+                },
+                type: 'post',
+                dataType: 'json',
+                success: function(data){
+                    
+                    $response = data;
+                    alert(response);
+                    if(response === "Successful Login"){
+                        writeCookie("govt",$('#email').val(),10);
+                        window.location.href="/start_trans";
+                    }else
+                        alert("Login Failed!");
+                },
+                error: function(data){
+                    alert("Error");
+                }
+            });*/
+            
+                /*
             $.ajax({
                 url: '/api/login_govt/email_pass',
 
@@ -42,14 +82,28 @@ $(document).ready(() => {
                 method: 'POST'
             }).done(function (msg) {
                 console.log(msg);
-                if (msg === "Succesful Login") {
-                    console.log(data);
+                
+                if (msg == "Successful Login") {
                     writeCookie("govt",$('#email').val(),10);
-                    window.location.href="/register"
+                    window.location.href="/start_trans";
+                    
+                    //var ethu_id = 1;//////////////fetch from database
+                    $.get('/getAccounts',{account : ethu_id},function (res) {
+                        alert("try"+res);
+                        $.post('/setValidator',null,function (res1) {
+                        
+                            console.log(res1);
+                             
+                            
+                        });
+                    
+                    });
+                   
+                         
                 }
                 else {
                     console.log("could not add the rows right now")
-                    window.location.href="/start_trans"
+                    window.location.href="/register"
                 }
             })
 
@@ -60,7 +114,7 @@ $(document).ready(() => {
             //
             // }).catch(err=>{
             //     throw err;
-            // })
+            // })*/
         }
     });
     $('#register').click(() => {

@@ -25,7 +25,7 @@ $(document).ready(() => {
     else {*/
         $('#submit').click(() => {
 
-            console.log("HEY");
+            console.log("HEY submit create trans");
 
             $.get( "/api/validate/validate_trans", { registration_no: $('#registration_no').val() } )
                 .done(function( data ) {
