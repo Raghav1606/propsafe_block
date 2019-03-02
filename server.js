@@ -23,6 +23,9 @@ const Web3 = require('web3');
 const truffle_connect = require('./connection/app.js');
 const bodyParser = require('body-parser');
 
+var sender;
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -31,6 +34,27 @@ app.use(bodyParser.json());
 
 
 
+app.get('/getAccounts', (req, res) => {
+ console.log("**** GET /getAccounts lalalalal****");
+ truffle_connect.start(function (answer) {
+   res.send(answer);
+ })
+});
+
+
+
+/*
+app.get('/setSender', (req, res) => {
+ console.log("**** GET /setSender lalalalal****");
+    truffle_connect.start(function (answer) {
+   
+        sender=answer.body.accounts[req.body.account];
+ })
+    
+    res.send(answer);
+
+});
+*/
 
 
 //*********************************    ACCESS CONTROL   *************************************
@@ -64,20 +88,26 @@ app.post('/setTransactor', (req, res) => {
 
 //addLandTransaction: function(ownerAddress,coordinates,ownerName,location, callback)
 
+
+
 app.post('/addLandTransaction', (req, res) => {
   console.log("**** Set Transactor val ****");
   console.log(req.body);
     
-  let ownerAddress = req.body.ownerAddress;
-  let coordinates = req.body.coordinates;
+  let owner_id = req.body.owner_id;
   let ownerName = req.body.ownerName;
-  let  location = req.body.location;
+  let locality_id = req.body.locality_id;
+  let  current_status = req.body.current_status;
+  let _address = req.body._address;
+  let  area = req.body.area;
   
-  truffle_connect.addLandTransaction(ownerAddress,coordinates, ownerName,location (answer) => {
+  truffle_connect.addLandTransaction(owner_id, ownerName, locality_id, current_status, _address, area, (answer) => {
     console.log(answer+"OKOKOK");
       res.send(answer);
   });
 });
+
+
 
 //validateAddLandTransaction: function(index, callback)
 app.post('/validateAddLandTransaction', (req, res) => {
@@ -89,6 +119,8 @@ app.post('/validateAddLandTransaction', (req, res) => {
       res.send(answer);
   });
 });
+
+/////////////
 
 
 //getAddLandTransaction: function(index, callback) 

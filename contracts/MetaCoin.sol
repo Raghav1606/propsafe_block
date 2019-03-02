@@ -100,13 +100,13 @@ contract MetaCoin {
     function setOwner(address _newOwner) public onlyOwner {
         owner = _newOwner;
     }
-
+//////////aaaa
     function setValidator(address _validatorAddress) public onlyOwner returns(bool sufficient){
         validators[_validatorAddress] = true;
         
         return true;
     }
-    
+////////////aa    
     function setTransactor(address _transactorAddress) public onlyOwner onlyValidator {
         transactors[_transactorAddress] = true;
     }
@@ -193,7 +193,7 @@ contract MetaCoin {
     
     
     
-    ///////
+    ///////aa
     function addLandTransaction(address owner_id, string memory ownerName, uint locality_id, string current_status, string _address, uint area) public onlyTransactor
     {
         Land memory land = Land({ 
@@ -219,7 +219,7 @@ contract MetaCoin {
         addLandTransactions.push(txn);
     }
 
-    ///////
+    ///////aaaaaaaaaaaaaaaaaaaa
     function transferLandTransaction(string _date, uint landIndex, address newLandOwner,string newLandOwnerName, uint ids, 
     string mode_of_payment, uint property_Price, string property_for) public onlyTransactor
     {
@@ -255,7 +255,7 @@ contract MetaCoin {
         transferLandTransactions.push(txn);
     }
     
-    //////
+    //////aaaa
     function validateAddLandTransaction(uint _index) public onlyValidator {
         AddLandTransaction storage txn = addLandTransactions[_index];
         for (uint i = 0; i < txn.validators.length; i++) {
@@ -271,7 +271,7 @@ contract MetaCoin {
         }
     }   
 
-    ///////////////////////
+    ///////////////////////aaaaaaaaa
     function validateTransferLandTransaction(uint _index) public onlyValidator {
         TransferLandTransaction storage txn = transferLandTransactions[_index];
         for (uint i = 0; i < txn.validators.length; i++) {
@@ -287,7 +287,7 @@ contract MetaCoin {
         }
     }
 
-//////////////
+//////////////aaaaa
    function getAddLandTransaction(uint _index) public view onlyValidator returns (AddLandTransaction memory t) {
         
         AddLandTransaction memory txn = addLandTransactions[_index];
@@ -295,29 +295,29 @@ contract MetaCoin {
         
     }
 
-//////////////
+//////////////aaaaaaaaa
     function getTransferLandTransaction(uint _index) public view onlyValidator returns (TransferLandTransaction memory t) {
         TransferLandTransaction memory txn = transferLandTransactions[_index];
         return txn;
     }
 
 
-//////////////////////
+//////////////////////not used
     function getAddLandTransactionsLength() public view returns (uint) {
         return addLandTransactions.length;
     }
-
+//////////////not used
     function getTransferLandTransactionsLength() public view returns (uint) {
         return transferLandTransactions.length;
     }
-
+/////////////not used
     function getLandsLength() public view returns (uint) {
         return lands.length;
     }
 
 
 
-/////////////
+/////////////aaaaaaaaaaaaa
     function getLandById(uint _index) public view onlyTransactor returns (Land memory l){ 
     
     //uint property_id,address owner_id, string ownerName, uint locality_id, address[] previousOwners, string current_status,string address,
@@ -329,21 +329,21 @@ contract MetaCoin {
     }
 
 
-//////////
+//////////aaaaaaaaaaa
     function getLandA() public view onlyTransactor returns ( Land[] memory l) {
         return (lands);
     }
     
-////////////
+////////////aaaaaaaaaaaa
     function getAddLandTransactionsA() public view onlyTransactor returns (AddLandTransaction[] memory l) {
         return (addLandTransactions);
     }
-    
+/////////////aaaaaaaaaaaa
     function getTransferLandTransactionsA() public view onlyTransactor returns (TransferLandTransaction[] memory l) {
         return (transferLandTransactions);
     }
    
-    ////
+////internal
     function addLand(AddLandTransaction storage _transaction) internal onlyValidator {
         
         _transaction.land.property_id = lands.length;
@@ -356,7 +356,7 @@ contract MetaCoin {
 
     }
     
-/////////////
+/////////////internal
     function transferLand(TransferLandTransaction storage _transaction) internal onlyValidator {
     
         lands[_transaction.landIndex].previousOwners.push(lands[_transaction.landIndex].owner_id);
@@ -366,7 +366,7 @@ contract MetaCoin {
         transferLandTransactions[_transaction.registration_number].status = "Validated";
     }
 
-
+//////aaaaa
     function getLandByOwner(address owner_id) public view onlyTransactor returns ( Land[] l1) {
         
         Land[] l;

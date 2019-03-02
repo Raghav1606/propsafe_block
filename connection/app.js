@@ -85,7 +85,7 @@ module.exports = {
     //addLandTransaction(address _ownerAddress, bytes32[] memory _coordinates, string memory _ownerName, bytes32 _location)
     
     
-    addLandTransaction: function(ownerAddress,coordinates,ownerName,location, callback) { //gets the selected account 
+    addLandTransaction: function(owner_id, ownerName, locality_id, current_status, _address, area, callback) { //gets the selected account 
     var self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
@@ -95,7 +95,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.addLandTransaction.call(ownerAddress,coordinates,ownerName,location, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.addLandTransaction.call(owner_id, ownerName, locality_id, current_status, _address, area, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -149,7 +149,8 @@ module.exports = {
     
     // function transferLandTransaction(address _newLandOwner, string memory _newLandOwnerName, uint _landIndex) 
     
-    transferLandTransaction: function(newOwner,newOwnerName,landIndex, callback) { //gets the selected account 
+    transferLandTransaction: function(_date, landIndex, newLandOwner, newLandOwnerName, ids, 
+     mode_of_payment, property_Price, property_for, callback) { //gets the selected account 
     var self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
@@ -159,7 +160,8 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.transferLandTransaction.call(newOwner,newOwnerName,landIndex, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.transferLandTransaction.call(date, landIndex, newLandOwner, newLandOwnerName, ids, 
+     mode_of_payment, property_Price, property_for, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -217,7 +219,7 @@ module.exports = {
     
     //function getLand(uint _index)
     
-    getLand: function(index, callback) { //gets the selected account 
+    getLandById: function(index, callback) { //gets the selected account 
     var self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
@@ -227,7 +229,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getLand.call(index, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getLandById.call(index, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -240,7 +242,7 @@ module.exports = {
     
     
     //function getLandA()
-    getAllLand: function(callback) { //gets the selected account 
+    getLandA: function(callback) { //gets the selected account 
     var self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
@@ -250,7 +252,67 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getLandA.call(index, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getLandA.call({from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+    }).then(function(value) {   //useless lines
+        callback(value.valueOf());
+    }).catch(function(e) {
+        console.log(e);
+        callback("Error 404");
+    });
+  },
+    
+    getAddLandTransactionsA: function( callback) { //gets the selected account 
+    var self = this;
+
+    // Bootstrap the MetaCoin abstraction for Use.
+    MetaCoin.setProvider(self.web3.currentProvider);
+
+    var meta;
+    MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
+      meta = instance;
+      
+        return meta.getAddLandTransactionsA.call( {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+    }).then(function(value) {   //useless lines
+        callback(value.valueOf());
+    }).catch(function(e) {
+        console.log(e);
+        callback("Error 404");
+    });
+  },
+    
+    
+    
+    getTransferLandTransactionsA: function( callback) { //gets the selected account 
+    var self = this;
+
+    // Bootstrap the MetaCoin abstraction for Use.
+    MetaCoin.setProvider(self.web3.currentProvider);
+
+    var meta;
+    MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
+      meta = instance;
+      
+        return meta.getTransferLandTransactionsA.call( {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+    }).then(function(value) {   //useless lines
+        callback(value.valueOf());
+    }).catch(function(e) {
+        console.log(e);
+        callback("Error 404");
+    });
+  },
+    
+    
+    getLandByOwner: function(owner_id, callback) { //gets the selected account 
+    var self = this;
+
+    // Bootstrap the MetaCoin abstraction for Use.
+    MetaCoin.setProvider(self.web3.currentProvider);
+
+    var meta;
+    MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
+      meta = instance;
+      
+        return meta.getLandByOwner.call(owner_id, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -258,6 +320,7 @@ module.exports = {
         callback("Error 404");
     });
   }
+    
     
     
     
