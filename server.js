@@ -138,16 +138,24 @@ app.post('/getAddLandTransaction', (req, res) => {
 
 //transferLandTransaction: function(newOwner,newOwnerName,landIndex, callback)
 
-
+//_date, landIndex, newLandOwner, newLandOwnerName, ids, 
+     mode_of_payment, property_Price, property_for
 app.post('/transferLandTransaction', (req, res) => {
   console.log("**** transferLandTransaction val ****");
   console.log(req.body);
     
-  let newOwner = req.body.newOwner;
-  let newOwnerName = req.body.newOwnerName;
+  let _date = req.body._date;
+  let newLandOwner = req.body.newLandOwner;
   let landIndex = req.body.landIndex;
-  
-  truffle_connect.transferLandTransaction(newOwner,newOwnerName,landIndex (answer) => {
+    let newLandOwnerName = req.body.newLandOwnerName;
+      let ids = req.body.ids;
+  let mode_of_payment = req.body.mode_of_payment;
+  let property_Price = req.body.property_Price;
+  let property_for = req.body.property_for;
+
+
+  truffle_connect.transferLandTransaction(_date, landIndex, newLandOwner, newLandOwnerName, ids, 
+     mode_of_payment, property_Price, property_for, (answer) => {
     console.log(answer+"OKOKOK");
       res.send(answer);
   });
@@ -183,11 +191,11 @@ app.post('/getTransferLandTransaction', (req, res) => {
 
 ///getLand: function(index, callback)
 
-app.post('/getLand', (req, res) => {
-  console.log("**** getLand val ****");
+app.post('/getLandById', (req, res) => {
+  console.log("**** getLandById val ****");
   console.log(req.body);
   let index = req.body.index;
-  truffle_connect.getLand(index, (answer) => {
+  truffle_connect.getLandById(index, (answer) => {
     console.log(answer+"OKOKOK");
       res.send(answer);
   });
@@ -196,14 +204,45 @@ app.post('/getLand', (req, res) => {
 
 
 //getAllLand: function(callback)
-app.post('/getAllLand', (req, res) => {
-  console.log("**** getAllLand val ****");
+app.post('/getLandA', (req, res) => {
+  console.log("**** getLandA val ****");
   console.log(req.body);
-  truffle_connect.getAllLand( (answer) => {
+  truffle_connect.getLandA( (answer) => {
     console.log(answer+"OKOKOK");
       res.send(answer);
   });
 });
+
+
+app.post('/getAddLandTransactionsA', (req, res) => {
+  console.log("**** getAddLandTransactionsA val ****");
+  console.log(req.body);
+  truffle_connect.getAddLandTransactionsA( (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
+app.post('/getTransferLandTransactionsA', (req, res) => {
+  console.log("**** getTransferLandTransactionsA val ****");
+  console.log(req.body);
+  truffle_connect.getTransferLandTransactionsA( (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
+
+app.post('/getLandByOwner', (req, res) => {
+  console.log("**** getLandbyOwner ****");
+  console.log(req.body);
+  let owner_id = req.body.owner_id;
+  truffle_connect.getLandByOwner(owner_id, (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
 
 
 //*************************************************************************************************
