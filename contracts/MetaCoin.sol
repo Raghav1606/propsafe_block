@@ -36,12 +36,12 @@ contract MetaCoin {
         TRANSACTOR
     }
     
-    /*constructor() public {
+    constructor() public {
         owner = msg.sender;
-    }*/
+    }
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Sender address is not owner");
+        //require(msg.sender == owner, "Sender address is not owner");
         _;
     }
 
@@ -144,7 +144,7 @@ contract MetaCoin {
         uint locality_id;
         address[] previousOwners;
         string current_status;
-        string address;
+        string _address;
         uint area;
         uint[] registration_number;
     }
@@ -193,18 +193,8 @@ contract MetaCoin {
     
     
     
-    uint index;
-        address createdBy;
-        address[] validators;
-        Land land;
-        
-    
-    uint property_id;
-        address owner_id;
-        string ownerName;
-        
     ///////
-    function addLandTransaction(address owner_id, string memory ownerName, uint locality_id, string current_status, string address, uint area) public onlyTransactor
+    function addLandTransaction(address owner_id, string memory ownerName, uint locality_id, string current_status, string _address, uint area) public onlyTransactor
     {
         Land memory land = Land({ 
             property_id: 0,
@@ -213,7 +203,7 @@ contract MetaCoin {
             locality_id: locality_id,
             previousOwners: new address[](0),
             current_status:current_status,
-            address:address,
+            _address:_address,
             area:area,
             registration_number: new uint[](0)
         }); 
@@ -230,30 +220,38 @@ contract MetaCoin {
     }
 
     ///////
-    function transferLandTransaction(string date, uint landIndex, address newLandOwner,string newLandOwnerName, uint property_id, uint deed_id,
-        uint subDeed_id, uint SRO_office_id, uint locality_id, uint book_number, string mode_of_payment, address landOwnerSeller,
-        uint property_Price, string property_for) public onlyTransactor
+    function transferLandTransaction(string _date, uint landIndex, address newLandOwner,string newLandOwnerName, uint ids, 
+    string mode_of_payment, uint property_Price, string property_for) public onlyTransactor
     {
-        TransferLandTransaction memory txn = TransferLandTransaction({
-            registration_number: transferLandTransactions.length,
-            date: date,
-            landIndex:landIndex,
-            newLandOwner:newLandOwner,
-            newLandOwnerName: newLandOwnerName,
-            property_id:property_id, 
-            deed_id:deed_id,
-            subDeed_id: subDeed_id,
-            SRO_office_id: SRO_office_id,
-            locality_id:locality_id,
-            book_number:book_number,
-            mode_of_payment:mode_of_payment,
-            landOwnerSeller: landOwnerSeller,
-            status: "Pending",
-            property_Price: property_Price,
-            property_for: property_for,
-            createdBy: msg.sender,
-            validators: new address[](0)
-        });
+        
+        TransferLandTransaction memory txn;
+        Land x = lands[landIndex];
+        
+        /*txn.registration_number = transferLandTransactions.length;
+        txn. property_id = ids%1000;
+        ids = ids/1000;
+        txn.deed_id = ids%1000;
+        ids = ids/1000;
+        txn.subDeed_id = ids%1000;
+        ids = ids/1000;
+        txn.SRO_office_id = ids%1000;
+        ids = ids/1000;
+        txn.locality_id = ids%1000;
+        ids = ids/1000;
+        txn.book_number = ids%1000;
+        txn.date = _date;
+        txn.landIndex = landIndex;
+        txn.newLandOwner = newLandOwner;
+        txn.newLandOwnerName = newLandOwnerName;
+        txn.mode_of_payment = mode_of_payment;
+        txn.landOwnerSeller = x.owner_id;
+        txn.status = "Pending";
+        txn.property_Price =  property_Price;
+        txn.property_for =  property_for;
+        txn.createdBy =  msg.sender;
+        txn.validators =  new address[](0);
+        */
+        
         transferLandTransactions.push(txn);
     }
     
@@ -290,7 +288,7 @@ contract MetaCoin {
     }
 
 //////////////
-    function getAddLandTransaction(uint _index) public view onlyValidator returns (AddLandTransaction memory txn) {
+   function getAddLandTransaction(uint _index) public view onlyValidator returns (AddLandTransaction memory t) {
         
         AddLandTransaction memory txn = addLandTransactions[_index];
         return txn;
@@ -298,7 +296,7 @@ contract MetaCoin {
     }
 
 //////////////
-    function getTransferLandTransaction(uint _index) public view onlyValidator returns (TransferLandTransaction memory txn) {
+    function getTransferLandTransaction(uint _index) public view onlyValidator returns (TransferLandTransaction memory t) {
         TransferLandTransaction memory txn = transferLandTransactions[_index];
         return txn;
     }
@@ -331,7 +329,6 @@ contract MetaCoin {
     }
 
 
-
 //////////
     function getLandA() public view onlyTransactor returns ( Land[] memory l) {
         return (lands);
@@ -345,12 +342,12 @@ contract MetaCoin {
     function getTransferLandTransactionsA() public view onlyTransactor returns (TransferLandTransaction[] memory l) {
         return (transferLandTransactions);
     }
-    
+   
     ////
     function addLand(AddLandTransaction storage _transaction) internal onlyValidator {
         
-        _trasaction.land.property_id = lands.length;
-        _trasaction.land.status = "Validated";
+        _transaction.land.property_id = lands.length;
+        _transaction.status = "Validated";
         lands.push(_transaction.land);
         
         //delete addLandTransactions[_transaction.index];
@@ -358,10 +355,11 @@ contract MetaCoin {
         //addLandTransactions.length--;
 
     }
+    
 /////////////
     function transferLand(TransferLandTransaction storage _transaction) internal onlyValidator {
     
-        lands[_transaction.landIndex].previousOwners.push(lands[_transaction.landIndex].ownerAddress);
+        lands[_transaction.landIndex].previousOwners.push(lands[_transaction.landIndex].owner_id);
         lands[_transaction.landIndex].owner_id = _transaction.newLandOwner;
         lands[_transaction.landIndex].ownerName = _transaction.newLandOwnerName;
         lands[_transaction.landIndex].registration_number.push(_transaction.registration_number);
@@ -369,9 +367,9 @@ contract MetaCoin {
     }
 
 
-    function getLandByOwner(uint owner_id) public view onlyTransactor returns ( Land[] memory l) {
+    function getLandByOwner(address owner_id) public view onlyTransactor returns ( Land[] l1) {
         
-        Lands[] memory l;
+        Land[] l;
         for(uint i = 0;i < lands.length; i++){
             if(lands[i].owner_id == owner_id)
                 l.push(lands[i]);
