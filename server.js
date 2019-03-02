@@ -29,6 +29,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+
+
+
+
+//*********************************    ACCESS CONTROL   *************************************
 app.post('/setValidator', (req, res) => {
   console.log("**** setting val ****");
   console.log(req.body);
@@ -38,6 +43,26 @@ app.post('/setValidator', (req, res) => {
       res.send(answer);
   });
 });
+
+
+
+
+//***********************************************************************************************
+
+
+//*********************************    LAND REGISTRY    *********************************************
+
+
+
+
+
+
+
+//*************************************************************************************************
+
+
+
+
 
 
 //app.listen(4000, () => { console.log("Server running on http://localhost:4000")})
