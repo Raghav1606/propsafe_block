@@ -1,4 +1,5 @@
 pragma solidity ^0.4.17;
+pragma experimental ABIEncoderV2;
 
 import "./ConvertLib.sol";
 
@@ -165,7 +166,7 @@ contract MetaCoin {
 //Land registry
 
 
-   /*
+  
     
     struct Land {
         address ownerAddress;
@@ -336,18 +337,16 @@ contract MetaCoin {
 
     function transferLand(TransferLandTransaction storage _transaction) internal onlyValidator {
         require(_transaction.validators.length >= requiredValidatorsLength, "Transfer land needs at least two validators");
-        TransferLandTransaction storage lastTransaction = transferLandTransactions[transferLandTransactions.length - 1]; 
-        lastTransaction.index = _transaction.index;
-        transferLandTransactions[_transaction.index] = lastTransaction;
-        delete transferLandTransactions[transferLandTransactions.length - 1];
+        //TransferLandTransaction storage lastTransaction = transferLandTransactions[transferLandTransactions.length - 1]; 
+        //lastTransaction.index = _transaction.index;
+        //transferLandTransactions[_transaction.index] = lastTransaction;
+        //delete transferLandTransactions[transferLandTransactions.length - 1];
         transferLandTransactions.length--;
         lands[_transaction.landIndex].previousOwners.push(lands[_transaction.landIndex].ownerAddress);
         lands[_transaction.landIndex].ownerAddress = _transaction.newLandOwner;
         lands[_transaction.landIndex].ownerName = _transaction.newLandOwnerName;
-    }*/
-
-
-
+        transferLandTransactions.length--;
+    }
 
 
 }
