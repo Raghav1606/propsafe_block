@@ -151,16 +151,12 @@ contract MetaCoin {
     
     
     
-
-    
-    
-    
-    
     struct AddLandTransaction {
         uint index;
         address createdBy;
         address[] validators;
         Land land;
+        string status;
     }
     
     
@@ -171,15 +167,16 @@ contract MetaCoin {
         string date;
         uint landIndex;
         address newLandOwner;
+        string newLandOwnerName;
         uint property_id;
         uint deed_id;
         uint subDeed_id;
         uint SRO_office_id;
-        uint Locality_id;
-        uint Book_number;
+        uint locality_id;
+        uint book_number;
         string mode_of_payment;
         address landOwnerSeller;
-        string status = "Pending";
+        string status;
         address createdBy;
         address[] validators;
         uint property_Price;
@@ -192,44 +189,75 @@ contract MetaCoin {
     TransferLandTransaction[] transferLandTransactions;
     uint requiredValidatorsLength = 1;
     
-    function addLandTransaction(address _ownerAddress, bytes32[] memory _coordinates, string memory _ownerName, bytes32 _location) 
-    public 
-    onlyTransactor
+    
+    
+    
+    
+    uint index;
+        address createdBy;
+        address[] validators;
+        Land land;
+        
+    
+    uint property_id;
+        address owner_id;
+        string ownerName;
+        
+    ///////
+    function addLandTransaction(address owner_id, string memory ownerName, uint locality_id, string current_status, string address, uint area) public onlyTransactor
     {
         Land memory land = Land({ 
-            ownerAddress: _ownerAddress,
+            property_id: 0,
+            owner_id: owner_id,
+            ownerName: ownerName,
+            locality_id: locality_id,
             previousOwners: new address[](0),
-            coordinates: _coordinates,
-            ownerName: _ownerName,
-            location: _location
+            current_status:current_status,
+            address:address,
+            area:area,
+            registration_number: new uint[](0)
         }); 
         
         AddLandTransaction memory txn = AddLandTransaction({  
             index: addLandTransactions.length,
             createdBy: msg.sender,
             validators: new address[](0),
-            land: land
+            land: land,
+            status: "Pending"
         });
         
         addLandTransactions.push(txn);
     }
 
-    function transferLandTransaction(address _newLandOwner, string memory _newLandOwnerName, uint _landIndex) 
-    public 
-    onlyTransactor
+    ///////
+    function transferLandTransaction(string date, uint landIndex, address newLandOwner,string newLandOwnerName, uint property_id, uint deed_id,
+        uint subDeed_id, uint SRO_office_id, uint locality_id, uint book_number, string mode_of_payment, address landOwnerSeller,
+        uint property_Price, string property_for) public onlyTransactor
     {
-        address[] memory validators;
         TransferLandTransaction memory txn = TransferLandTransaction({
-            index: transferLandTransactions.length,
-            landIndex: _landIndex,
+            registration_number: transferLandTransactions.length,
+            date: date,
+            landIndex:landIndex,
+            newLandOwner:newLandOwner,
+            newLandOwnerName: newLandOwnerName,
+            property_id:property_id, 
+            deed_id:deed_id,
+            subDeed_id: subDeed_id,
+            SRO_office_id: SRO_office_id,
+            locality_id:locality_id,
+            book_number:book_number,
+            mode_of_payment:mode_of_payment,
+            landOwnerSeller: landOwnerSeller,
+            status: "Pending",
+            property_Price: property_Price,
+            property_for: property_for,
             createdBy: msg.sender,
-            newLandOwner: _newLandOwner,
-            newLandOwnerName: _newLandOwnerName,
-            validators: validators
+            validators: new address[](0)
         });
         transferLandTransactions.push(txn);
     }
-
+    
+    //////
     function validateAddLandTransaction(uint _index) public onlyValidator {
         AddLandTransaction storage txn = addLandTransactions[_index];
         for (uint i = 0; i < txn.validators.length; i++) {
@@ -245,6 +273,7 @@ contract MetaCoin {
         }
     }   
 
+    ///////////////////////
     function validateTransferLandTransaction(uint _index) public onlyValidator {
         TransferLandTransaction storage txn = transferLandTransactions[_index];
         for (uint i = 0; i < txn.validators.length; i++) {
@@ -260,36 +289,22 @@ contract MetaCoin {
         }
     }
 
-    function getAddLandTransaction(uint _index) public view onlyValidator returns (
-        uint index,
-        address createdBy, 
-        address[] memory validators,
-        address ownerAddress,
-        address[] memory previousOwners,
-        bytes32[] memory coordinates,
-        string memory ownerName,
-        bytes32 location
-    ) {
+//////////////
+    function getAddLandTransaction(uint _index) public view onlyValidator returns (AddLandTransaction memory txn) {
+        
         AddLandTransaction memory txn = addLandTransactions[_index];
-        Land memory land = txn.land;
-        return (
-        txn.index, txn.createdBy, txn.validators, land.ownerAddress, 
-        land.previousOwners, land.coordinates, land.ownerName, land.location
-        );
+        return txn;
+        
     }
 
-    function getTransferLandTransaction(uint _index) public view onlyValidator returns (
-        uint index,
-        uint landIndex,
-        string memory newLandOwnerName,
-        address createdBy,
-        address newLandOwner,
-        address[] memory validators
-    ) {
+//////////////
+    function getTransferLandTransaction(uint _index) public view onlyValidator returns (TransferLandTransaction memory txn) {
         TransferLandTransaction memory txn = transferLandTransactions[_index];
-        return (txn.index, txn.landIndex, txn.newLandOwnerName, txn.createdBy, txn.newLandOwner, txn.validators);
+        return txn;
     }
 
+
+//////////////////////
     function getAddLandTransactionsLength() public view returns (uint) {
         return addLandTransactions.length;
     }
@@ -302,32 +317,40 @@ contract MetaCoin {
         return lands.length;
     }
 
-    function getLand(uint _index) public view onlyTransactor returns (
-        address ownerAddress,
-        address[] memory previousOwners,
-        bytes32[] memory coordinates,
-        string memory ownerName,
-        bytes32 location
-    ) {
-        Land memory land = lands[_index];
-        return (land.ownerAddress, land.previousOwners, land.coordinates, (land.ownerName), land.location);
-    }
+
+
+/////////////
+    function getLandById(uint _index) public view onlyTransactor returns (Land memory l){ 
     
-    function getLandA() public view onlyTransactor returns (
-        Land[] memory l) {
+    //uint property_id,address owner_id, string ownerName, uint locality_id, address[] previousOwners, string current_status,string address,
+    //uint area, uint[] registration_number) {
+        
+        Land memory land = lands[_index];
+        
+        return (land);
+    }
+
+
+
+//////////
+    function getLandA() public view onlyTransactor returns ( Land[] memory l) {
         return (lands);
     }
     
-    function getAddLandTransactionA() public view onlyTransactor returns (
-        AddLandTransaction[] memory l
-    ) {
+////////////
+    function getAddLandTransactionsA() public view onlyTransactor returns (AddLandTransaction[] memory l) {
         return (addLandTransactions);
     }
     
+    function getTransferLandTransactionsA() public view onlyTransactor returns (TransferLandTransaction[] memory l) {
+        return (transferLandTransactions);
+    }
     
+    ////
     function addLand(AddLandTransaction storage _transaction) internal onlyValidator {
-        require(_transaction.validators.length >= requiredValidatorsLength, "Transfer land needs at least two validators");
         
+        _trasaction.land.property_id = lands.length;
+        _trasaction.land.status = "Validated";
         lands.push(_transaction.land);
         
         //delete addLandTransactions[_transaction.index];
@@ -335,18 +358,29 @@ contract MetaCoin {
         //addLandTransactions.length--;
 
     }
-
+/////////////
     function transferLand(TransferLandTransaction storage _transaction) internal onlyValidator {
     
-        require(_transaction.validators.length >= requiredValidatorsLength, "Transfer land needs at least two validators");
-        
         lands[_transaction.landIndex].previousOwners.push(lands[_transaction.landIndex].ownerAddress);
-        lands[_transaction.landIndex].ownerAddress = _transaction.newLandOwner;
+        lands[_transaction.landIndex].owner_id = _transaction.newLandOwner;
         lands[_transaction.landIndex].ownerName = _transaction.newLandOwnerName;
-
+        lands[_transaction.landIndex].registration_number.push(_transaction.registration_number);
+        transferLandTransactions[_transaction.registration_number].status = "Validated";
     }
 
 
+    function getLandByOwner(uint owner_id) public view onlyTransactor returns ( Land[] memory l) {
+        
+        Lands[] memory l;
+        for(uint i = 0;i < lands.length; i++){
+            if(lands[i].owner_id == owner_id)
+                l.push(lands[i]);
+        }
+        return (l);
+    }
+    
+    
+    
 }
 
 
