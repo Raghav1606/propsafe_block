@@ -34,8 +34,9 @@ app.use(bodyParser.json());
 
 
 //*********************************    ACCESS CONTROL   *************************************
+
 app.post('/setValidator', (req, res) => {
-  console.log("**** setting val ****");
+  console.log("**** SetValidator val ****");
   console.log(req.body);
   let currentAcount = req.body.account;
   truffle_connect.setValidator(currentAcount, (answer) => {
@@ -44,6 +45,15 @@ app.post('/setValidator', (req, res) => {
   });
 });
 
+app.post('/setTransactor', (req, res) => {
+  console.log("**** Set Transactor val ****");
+  console.log(req.body);
+  let currentAcount = req.body.account;
+  truffle_connect.setTransactor(currentAcount, (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
 
 
 
@@ -52,10 +62,116 @@ app.post('/setValidator', (req, res) => {
 
 //*********************************    LAND REGISTRY    *********************************************
 
+//addLandTransaction: function(ownerAddress,coordinates,ownerName,location, callback)
+
+app.post('/addLandTransaction', (req, res) => {
+  console.log("**** Set Transactor val ****");
+  console.log(req.body);
+    
+  let ownerAddress = req.body.ownerAddress;
+  let coordinates = req.body.coordinates;
+  let ownerName = req.body.ownerName;
+  let  location = req.body.location;
+  
+  truffle_connect.addLandTransaction(ownerAddress,coordinates, ownerName,location (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
+//validateAddLandTransaction: function(index, callback)
+app.post('/validateAddLandTransaction', (req, res) => {
+  console.log("**** validateAddLandTransaction val ****");
+  console.log(req.body);
+  let index = req.body.index;
+  truffle_connect.validateAddLandTransaction(index, (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
+
+//getAddLandTransaction: function(index, callback) 
+app.post('/getAddLandTransaction', (req, res) => {
+  console.log("**** getAddLandTransaction val ****");
+  console.log(req.body);
+  let index = req.body.index;
+  truffle_connect.getAddLandTransaction(index, (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
 
 
 
+//transferLandTransaction: function(newOwner,newOwnerName,landIndex, callback)
 
+
+app.post('/transferLandTransaction', (req, res) => {
+  console.log("**** transferLandTransaction val ****");
+  console.log(req.body);
+    
+  let newOwner = req.body.newOwner;
+  let newOwnerName = req.body.newOwnerName;
+  let landIndex = req.body.landIndex;
+  
+  truffle_connect.transferLandTransaction(newOwner,newOwnerName,landIndex (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
+
+
+//validateTransferLandTransaction: function(index, callback)
+
+
+app.post('/validateTransferLandTransaction', (req, res) => {
+  console.log("**** validateTransferLandTransaction val ****");
+  console.log(req.body);
+  let index = req.body.index;
+  truffle_connect.validateTransferLandTransaction(index, (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
+
+// getTransferLandTransaction: function(index, callback)
+
+app.post('/getTransferLandTransaction', (req, res) => {
+  console.log("**** getTransferLandTransaction val ****");
+  console.log(req.body);
+  let index = req.body.index;
+  truffle_connect.getTransferLandTransaction(index, (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
+///getLand: function(index, callback)
+
+app.post('/getLand', (req, res) => {
+  console.log("**** getLand val ****");
+  console.log(req.body);
+  let index = req.body.index;
+  truffle_connect.getLand(index, (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
+
+
+
+//getAllLand: function(callback)
+app.post('/getAllLand', (req, res) => {
+  console.log("**** getAllLand val ****");
+  console.log(req.body);
+  truffle_connect.getAllLand( (answer) => {
+    console.log(answer+"OKOKOK");
+      res.send(answer);
+  });
+});
 
 
 //*************************************************************************************************
