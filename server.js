@@ -40,4 +40,12 @@ app.post('/setValidator', (req, res) => {
 });
 
 
-app.listen(4000, () => { console.log("Server running on http://localhost:4000")})
+//app.listen(4000, () => { console.log("Server running on http://localhost:4000")})
+app.listen(port, () => {
+
+ // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+ truffle_connect.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+
+ console.log("Express Listening at http://localhost:" + port);
+
+});

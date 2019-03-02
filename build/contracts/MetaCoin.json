@@ -9881,14 +9881,14 @@
     "666": {
       "events": {},
       "links": {
-        "ConvertLib": "0x11BB182c4dE61035d480AA13D98C3FB340556aeB"
+        "ConvertLib": "0x7d0b5769377fd56672FC23b3C8705D21c87D36C9"
       },
-      "address": "0x63BB4dA10882d611A46e5947662aCc45cC22BefE",
-      "transactionHash": "0x9f1e6971a3c2afd3d15d44b5f8095f5e65f8bc15daee20f936930f256fd29e1d"
+      "address": "0xdB486B671888C191Da7A1f8E495418Ad9F98ecDE",
+      "transactionHash": "0xe727970a3f76c1a4eb828feb1867a3474fe6df1967d52447a7cdfb4a31951fa4"
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-03-02T05:30:18.240Z",
+  "updatedAt": "2019-03-02T06:39:42.025Z",
   "devdoc": {
     "methods": {}
   },
