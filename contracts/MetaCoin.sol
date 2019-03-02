@@ -135,15 +135,25 @@ contract MetaCoin {
 //Land registry
 
 
-  
-    
+ 
+
     struct Land {
-        address ownerAddress;
-        address[] previousOwners;
-        bytes32[] coordinates;
+        uint property_id;
+        address owner_id;
         string ownerName;
-        bytes32 location;
+        uint locality_id;
+        address[] previousOwners;
+        string current_status;
+        string address;
+        uint area;
     }
+    
+    
+    
+
+    
+    
+    
     
     struct AddLandTransaction {
         uint index;
@@ -152,13 +162,27 @@ contract MetaCoin {
         Land land;
     }
     
+    
+
+
     struct TransferLandTransaction {
-        uint index;
+        uint registration_number;
+        string date;
         uint landIndex;
-        string newLandOwnerName;
-        address createdBy;
         address newLandOwner;
+        uint property_id;
+        uint deed_id;
+        uint subDeed_id;
+        uint SRO_office_id;
+        uint Locality_id;
+        uint Book_number;
+        string mode_of_payment;
+        address landOwnerSeller;
+        string status = "Pending";
+        address createdBy;
         address[] validators;
+        uint property_Price;
+        string property_for;
     }
     
     mapping(address => uint[]) addressToLandIndexes;
