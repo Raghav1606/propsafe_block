@@ -7,7 +7,17 @@ route.post('/email_pass', function (req, res) {
 
     db.query("SELECT email_id, password FROM govt_official_master WHERE email_id='"+req.body.email+"' AND password='"+req.body.pass+"';").then((data) => {
         console.log(data);
-        res.send("Succesful Login");
+        if(data[1].rowCount === 1)
+        {
+            console.log("HEY");
+            res.send("Successful Login");
+        }
+        else
+        {
+            console.log("not HEY");
+            res.send("NOT Successful Login");
+        }
+
     }).catch((err) => {
         console.log(err);
         res.send(err);

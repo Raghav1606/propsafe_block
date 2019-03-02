@@ -6,6 +6,18 @@ $(document).ready(() => {
        console.log("rr");
     });
 
+    function writeCookie(name,value,days) {
+        var date, expires;
+        if (days) {
+            date = new Date();
+            date.setTime(date.getTime()+(days*24*60*60*1000));
+            expires = "; expires=" + date.toGMTString();
+        }else{
+            expires = "";
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
 
     $('#login').click(() => {
         console.log("Reached");
@@ -18,15 +30,37 @@ $(document).ready(() => {
         else
         {
             console.log("Reached");
-            $.post('/api/login_govt/email_pass',email_pass,function (data,status,xhr) {
-                console.log("YEAH");
-                console.log(data);
-                if(data.rowCount === 1)
-                    window.location.href = "/start_trans"
-                
-            }).catch(err=>{
-                throw err;
+
+            $.ajax({
+                url: '/api/login_govt/email_pass',
+
+                data: {
+                    email: $('#email').val(),
+                    pass: $('#pass').val()
+
+                },
+                method: 'POST'
+            }).done(function (msg) {
+                console.log(msg);
+                if (msg === "Succesful Login") {
+                    console.log(data);
+                    writeCookie("govt",$('#email').val(),10);
+                    window.location.href="/register"
+                }
+                else {
+                    console.log("could not add the rows right now")
+                    window.location.href="/start_trans"
+                }
             })
+
+
+            // $.post('/api/login_govt/email_pass',email_pass,function (data,status,xhr) {
+            //     console.log(data);
+            //     writeCookie("govt",$('#email').val(),10);
+            //
+            // }).catch(err=>{
+            //     throw err;
+            // })
         }
     });
     $('#register').click(() => {

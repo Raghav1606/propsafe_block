@@ -12,10 +12,8 @@ app.use('/login_govt_official', express.static(__dirname + '/public_static/admin
 app.use('/register_govt_official', express.static(__dirname + '/public_static/admin/register_govt_official.html'))
 app.use('/search_registry', express.static(__dirname + '/public_static/admin/search_registry.html'))
 app.use('/start_trans', express.static(__dirname + '/public_static/admin/start_trans.html'))
-
-app.use('/block', express.static(__dirname + '/public_static/admin/block.html'))
-
-
+app.use('/pending_trans', express.static(__dirname + '/public_static/admin/pending_trans.html'));
+app.use('/validate_or_not', express.static(__dirname + '/public_static/admin/validate_or_not.html'));
 
 
 const port = 4000 || process.env.PORT;
@@ -23,7 +21,7 @@ const Web3 = require('web3');
 const truffle_connect = require('./connection/app.js');
 const bodyParser = require('body-parser');
 
-var sender;
+var accounts;
 
 
 // parse application/x-www-form-urlencoded
@@ -36,23 +34,15 @@ app.use(bodyParser.json());
 
 app.get('/getAccounts', (req, res) => {
  console.log("**** GET /getAccounts lalalalal****");
- truffle_connect.start(function (answer) {
-    console.log(answer);
+ let currentAcount = req.body.account;
+ truffle_connect.start(currentAcount, (answer) =>{
+    
+     accounts = answer;
+     console.log(accounts);
    res.send(answer);
  })
 });
 
-
-app.get('/setSender', (req, res) => {
- console.log("**** GET /setSender lalalalal****");
-    truffle_connect.start(function (answer) {
-   
-        sender=answer.body.accounts[req.body.account];
- })
-    
-    res.send(answer);
-
-});
 
 
 
@@ -61,7 +51,7 @@ app.get('/setSender', (req, res) => {
 app.post('/setValidator', (req, res) => {
   console.log("**** SetValidator val ****");
   console.log(req.body);
-  let currentAcount = req.body.account;
+  let currentAcount = accounts[req.body.account];
   truffle_connect.setValidator(currentAcount, (answer) => {
     console.log(answer+"OKOKOK");
       res.send(answer);
@@ -71,7 +61,7 @@ app.post('/setValidator', (req, res) => {
 app.post('/setTransactor', (req, res) => {
   console.log("**** Set Transactor val ****");
   console.log(req.body);
-  let currentAcount = req.body.account;
+  let currentAcount = accounts[req.body.account]
   truffle_connect.setTransactor(currentAcount, (answer) => {
     console.log(answer+"OKOKOK");
       res.send(answer);
@@ -138,7 +128,7 @@ app.post('/getAddLandTransaction', (req, res) => {
 //transferLandTransaction: function(newOwner,newOwnerName,landIndex, callback)
 
 //_date, landIndex, newLandOwner, newLandOwnerName, ids, 
-     mode_of_payment, property_Price, property_for
+    
 app.post('/transferLandTransaction', (req, res) => {
   console.log("**** transferLandTransaction val ****");
   console.log(req.body);

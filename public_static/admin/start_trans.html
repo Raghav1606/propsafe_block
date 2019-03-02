@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Search Registry</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,28 +36,56 @@
 
 <div class="w3layouts-main">
     <div class="bg-layer">
-        <h1>Start Transaction</h1>
-        <div class="header-main">
-            <div class="main-icon">
-                <span class="fa fa-eercast"></span>
-            </div>
+        <h1>Search Transaction</h1>
+        <div class="header-main" style="width: 50%;">
             <div class="header-left-bottom">
                 <form>
                     <div class="icon1">
                         <span class="fa fa-user"></span>
-                        <input type="email" id="email" placeholder="Registration Number" required=""/>
+                        <input type="text" id="registration_no" placeholder="Registration No." required=""/>
                     </div>
                     <div class="icon1">
-                        <span class="fa fa-lock"></span>
-                        <input type="password" id="pass" placeholder="Password" required=""/>
+                        <span class="fa fa-user"></span>
+                        <input type="date" id="registration_date" placeholder="Registration Date" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="buyer_id" placeholder="Buyer ID" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="Property_id" placeholder="Property_id" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="Deed_id" placeholder="Deed_id" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="SRO_office_id" placeholder="SRO_office_id" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="Locality_id" placeholder="Locality_id" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="Book_no" placeholder="Book_no" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="Mode_of_payment" placeholder="Mode_of_payment" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="Seller_id" placeholder="Seller_id" required=""/>
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" id="Status" placeholder="Status" required=""/>
                     </div>
                     <div class="bottom">
-                        <button class="btn" id="login">Log In</button>
-                    </div>
-                    <div class="links">
-                        <p><a id="forgot_pass">Forgot Password?</a></p>
-                        <p class="right" id="register"><a href="#">New User? Register</a></p>
-                        <div class="clear"></div>
+                        <button class="btn" id="submit">Submit</button>
                     </div>
                 </form>
             </div>

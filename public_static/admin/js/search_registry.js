@@ -104,11 +104,24 @@ $(document).ready(() => {
 
     /*An array containing all the country names in the world:*/
     let registration_nos =[];
-    $.get('/api/transactions/viewAllRegNo', function (terminals) {
+    $.get('/api/transactions/viewAllRegNo', function (reg_nos) {
 
-        for (let i = 0; i < terminals.length; i++) {
-            console.log(terminals[i].registration_no);
-            registration_nos.push(terminals[i].registration_no);
+        for (let i = 0; i < reg_nos.length; i++) {
+            console.log(reg_nos[i].registration_number);
+            registration_nos.push(reg_nos[i].registration_number);
+
+        }
+
+    });
+
+    let buyer_ids =[];
+    $.get('/api/transactions/viewAllBuyerID', function (reg_nos) {
+
+        for (let i = 0; i < reg_nos.length; i++) {
+            console.log(reg_nos[i]. first_party_1);
+            buyer_ids.push(reg_nos[i].first_party_1);
+            buyer_ids.push(reg_nos[i].first_party_2);
+            buyer_ids.push(reg_nos[i].first_party_3);
 
         }
 
@@ -116,4 +129,6 @@ $(document).ready(() => {
 
     /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
     autocomplete(document.getElementById("registration_no"), registration_nos);
+    autocomplete(document.getElementById("buyer_id"), buyer_ids);
+
 });

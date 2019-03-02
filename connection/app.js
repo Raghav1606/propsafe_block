@@ -3,6 +3,7 @@ const contract = require('truffle-contract');
 const metacoin_artifact = require('../build/contracts/MetaCoin.json'); // connects with metacoin.sol
 var MetaCoin = contract(metacoin_artifact); //metacoin is a variable of this
 
+var sender;
 
 //connect hote hi accounts aajate hai using this
 module.exports = {
@@ -11,7 +12,7 @@ module.exports = {
     //   ****************************************    ACCESS CONTROL    ************************************************************
     
     
-  start: function(callback) {
+  start: function(selected,callback) {
     var self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
@@ -30,7 +31,7 @@ module.exports = {
       }
       self.accounts = accs;
       self.account = self.accounts[2];
-
+      sender = accounts[selected];    
       callback(self.accounts);
     });
       //don't see this till here
@@ -47,7 +48,7 @@ module.exports = {
     var meta;
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
-      return meta.setValidator.call(account, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+      return meta.setValidator.call(account, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -64,7 +65,7 @@ module.exports = {
     var meta;
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
-      return meta.setTransactor.call(account, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+      return meta.setTransactor.call(account, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -95,7 +96,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.addLandTransaction.call(owner_id, ownerName, locality_id, current_status, _address, area, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.addLandTransaction.call(owner_id, ownerName, locality_id, current_status, _address, area, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -117,7 +118,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.validateAddLandTransaction.call(index, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.validateAddLandTransaction.call(index, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -138,7 +139,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getAddLandTransaction.call(index, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getAddLandTransaction.call(index, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -161,7 +162,7 @@ module.exports = {
       meta = instance;
       
         return meta.transferLandTransaction.call(date, landIndex, newLandOwner, newLandOwnerName, ids, 
-     mode_of_payment, property_Price, property_for, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+     mode_of_payment, property_Price, property_for, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -184,7 +185,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.validateTransferLandTransaction.call(index, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.validateTransferLandTransaction.call(index, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -206,7 +207,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getTransferLandTransaction.call(index, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getTransferLandTransaction.call(index, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -229,7 +230,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getLandById.call(index, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getLandById.call(index, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -252,7 +253,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getLandA.call({from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getLandA.call({from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -272,7 +273,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getAddLandTransactionsA.call( {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getAddLandTransactionsA.call( {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -293,7 +294,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getTransferLandTransactionsA.call( {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getTransferLandTransactionsA.call( {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -313,7 +314,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getLandByOwner.call(owner_id, {from: account});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getLandByOwner.call(owner_id, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
