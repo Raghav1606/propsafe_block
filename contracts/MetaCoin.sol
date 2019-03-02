@@ -129,37 +129,6 @@ contract MetaCoin {
     
     
     
-    
-    
-    
-    
-    
-    /*
- 	mapping (address => uint) balances;
-
-	event Transfer(address indexed _from, address indexed _to, uint256 _value);
-
-	function MetaCoin() public {
-		balances[tx.origin] = 10000;
-        owner = msg.sender;
-	}
-
-	function sendCoin(address receiver, uint amount) public returns(bool sufficient) {
-		if (balances[msg.sender] < amount) return false;
-		balances[msg.sender] -= amount;
-		balances[receiver] += amount;
-		Transfer(msg.sender, receiver, amount);
-		return true;
-	}
-
-	function getBalanceInEth(address addr) public view returns(uint){
-		return ConvertLib.convert(getBalance(addr),2);
-	}
-
-	function getBalance(address addr) public view returns(uint) {
-		return balances[addr];
-	}*/
-
 
 
 ///.................................................................,.,.,.,.,.,.....................................
@@ -324,28 +293,32 @@ contract MetaCoin {
         return (lands);
     }
     
+    function getAddLandTransactionA() public view onlyTransactor returns (
+        AddLandTransaction[] memory l
+    ) {
+        return (addLandTransactions);
+    }
+    
+    
     function addLand(AddLandTransaction storage _transaction) internal onlyValidator {
         require(_transaction.validators.length >= requiredValidatorsLength, "Transfer land needs at least two validators");
-        //AddLandTransaction storage lastTransaction = addLandTransactions[addLandTransactions.length - 1];
-        //lastTransaction.index = _transaction.index;   
-        //addLandTransactions[_transaction.index] = lastTransaction;
-        //addLandTransactions.length--;
+        
         lands.push(_transaction.land);
-        delete addLandTransactions[addLandTransactions.length - 1]; 
-        addLandTransactions.length--;
+        
+        //delete addLandTransactions[_transaction.index];
+        
+        //addLandTransactions.length--;
+
     }
 
     function transferLand(TransferLandTransaction storage _transaction) internal onlyValidator {
+    
         require(_transaction.validators.length >= requiredValidatorsLength, "Transfer land needs at least two validators");
-        //TransferLandTransaction storage lastTransaction = transferLandTransactions[transferLandTransactions.length - 1]; 
-        //lastTransaction.index = _transaction.index;
-        //transferLandTransactions[_transaction.index] = lastTransaction;
-        //delete transferLandTransactions[transferLandTransactions.length - 1];
-        transferLandTransactions.length--;
+        
         lands[_transaction.landIndex].previousOwners.push(lands[_transaction.landIndex].ownerAddress);
         lands[_transaction.landIndex].ownerAddress = _transaction.newLandOwner;
         lands[_transaction.landIndex].ownerName = _transaction.newLandOwnerName;
-        transferLandTransactions.length--;
+
     }
 
 
