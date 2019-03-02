@@ -127,8 +127,74 @@ $(document).ready(() => {
 
     });
 
+    let prop_ids =[];
+    $.get('/api/transactions/viewAllPropId', function (reg_nos) {
+
+        for (let i = 0; i < reg_nos.length; i++) {
+            console.log(reg_nos[i].prop_id);
+            prop_ids.push(reg_nos[i].prop_id);
+        }
+
+    });
+
+    let deed_ids =[];
+    $.get('/api/transactions/viewAllDeedId', function (reg_nos) {
+
+        for (let i = 0; i < reg_nos.length; i++) {
+            console.log(reg_nos[i].deed_id);
+            deed_ids.push(reg_nos[i].deed_id);
+        }
+
+    });
+
+    let sro_office_ids =[];
+    $.get('/api/transactions/viewAllSROId', function (reg_nos) {
+
+        for (let i = 0; i < reg_nos.length; i++) {
+            console.log(reg_nos[i].sro_office_id);
+            sro_office_ids.push(reg_nos[i].sro_office_id);
+        }
+
+    });
+
+    let locality_ids =[];
+    $.get('/api/transactions/viewAllLocalityId', function (reg_nos) {
+
+        for (let i = 0; i < reg_nos.length; i++) {
+            //console.log(reg_nos[i].sro_office_id);
+            locality_ids.push(reg_nos[i].locality_id);
+        }
+
+    });
+    
+    $("#search").click(() => {
+        
+        let text1="select * from transaction_master where";
+        if($("#registration_no").val()!="")
+        {
+            text1+="registration_number = '"+ $(#registration_no).val+"'and";
+        }
+        if($("#buyer_id").val()!="")
+        {
+            text1 +="buyer_id = '"+$("#buyer_id").val()+"'";
+        }
+        
+        
+        
+    });
+
+
+
+
     /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
     autocomplete(document.getElementById("registration_no"), registration_nos);
     autocomplete(document.getElementById("buyer_id"), buyer_ids);
+    autocomplete(document.getElementById("Property_id"), prop_ids);
+    autocomplete(document.getElementById("Locality_id"), locality_ids);
+    autocomplete(document.getElementById("SRO_office_id"), sro_office_ids);
+    autocomplete(document.getElementById("Deed_id"), deed_ids);
+
+
+
 
 });

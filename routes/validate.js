@@ -57,7 +57,8 @@ route.get('/validate_trans', (req, res) => {
                                 textToFile+=bank_table_data[0][0].outgoing_10+"\n";
                                 textToFile+=bank_table_data[0][0].outgoing_20+"\n";
 
-                                console.log(p);
+                                //ls
+                                // console.log(p);
                                 textToFile+=prop_data[0][0].area+'\n';
                                 textToFile+=trans_data[0][0].property_price+"\n";
                                 textToFile+=trans_data[0][0].property_of+"\n";
