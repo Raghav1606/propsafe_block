@@ -37,13 +37,12 @@ app.use(bodyParser.json());
 app.get('/getAccounts', (req, res) => {
  console.log("**** GET /getAccounts lalalalal****");
  truffle_connect.start(function (answer) {
+    console.log(answer);
    res.send(answer);
  })
 });
 
 
-
-/*
 app.get('/setSender', (req, res) => {
  console.log("**** GET /setSender lalalalal****");
     truffle_connect.start(function (answer) {
@@ -54,7 +53,7 @@ app.get('/setSender', (req, res) => {
     res.send(answer);
 
 });
-*/
+
 
 
 //*********************************    ACCESS CONTROL   *************************************
