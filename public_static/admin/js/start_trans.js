@@ -23,8 +23,8 @@ $(document).ready(() => {
 
             console.log("HEY submit create trans");
 
-            let data1={};
-            data1.registraion_no=$("#registration_no").val();
+            var data1={};
+            data1.registration_no=$("#registration_no").val();
             data1.registraion_date=$("#registration_date").val();
             data1.buyer_id=$("#buyer_id").val();
             data1.property_id=$("#Property_id").val();
@@ -36,11 +36,14 @@ $(document).ready(() => {
             data1.seller_id=$("#Seller_id").val();
             data1.status=$("#Status").val();
             data1.price = $("#price").val();
-            
+        
+            console.log("start_trans\n"+data1);
+        
             $.get( "/api/validate/validate_trans", data1 ).done(function( data ) {
                                     
-                                    
-                    window.location.href="/validate_page"+"&data="+data;
+                    localStorage.setItem('testObject', JSON.stringify(data));
+                    window.location.href="/validate_opage";
+                
                                     
             });
         /*

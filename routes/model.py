@@ -25,21 +25,23 @@ INITIALIZE_WEIGHTS='random'
 
 # preprocessing
 
-yn = {"true": "0", "false": "1"}
-profile = {"self" : "0", "relatives" : "1", "others" : "2"}
-mode = {"cash" : "0", "cheque":"1"}
-source = {"work experience" : "0", "rental income" : "1", "gift" : "2", "inheritance":"3" , "sale property":"4"}
+yn = {"true": "0", "123": "1"}
+profile = {"self" : "0", "relatives" : "1", "123" : "2"}
+mode = {"cash" : "0", "123":"1"}
+source = {"work experience" : "0", "123" : "1", "gift" : "2", "inheritance":"3" , "sale property":"4"}
+locality = {"Anand Vihar" : "0", "123" : "1"}
+
 
 with open('jobs.txt', 'r') as f:
     x = f.readlines()
 
-for x1 in x:
-    x1 = x1.split('\n')[0]
-
+x = [x1.split('\n')[0] for x1 in x]
 
 x[0] = profile[x[0]]
 x[3] = yn[x[3]]
 x[10] = mode[x[10]]
+x[4]=locality[x[4]]
+x[8]=locality[x[8]]
 x[23] = yn[x[23]]
 x[29] = yn[x[29]]
 x[33] = yn[x[33]]

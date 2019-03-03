@@ -1,4 +1,6 @@
 $(document).ready(() => {
+    
+    console.log(localStorage.getItem('testObject'));
    
     $('#validate').click(() => {
         console.log("Reached");
