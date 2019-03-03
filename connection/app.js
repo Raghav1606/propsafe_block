@@ -85,7 +85,7 @@ module.exports = {
     
     //*********************************************************** LANDREGISTRY  ****************************************************************
     
-    //addLandTransaction(address _ownerAddress, bytes32[] memory _coordinates, string memory _ownerName, bytes32 _location)
+    //afunction addLandTransaction(address owner_id, string memory ownerName, uint locality_id, string current_status, string _address, uint area)
     
     
     addLandTransaction: function(owner_id, ownerName, locality_id, current_status, _address, area, callback) { //gets the selected account 
@@ -98,7 +98,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.addLandTransaction.call(owner_id, ownerName, locality_id, current_status, _address, area, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.addLandTransaction.call(sender, "RAGHAV", 1, "VACANT", "DELHI",100, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -141,7 +141,7 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getAddLandTransaction.call(index, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        return meta.getAddLandTransaction.call(0, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -163,7 +163,16 @@ module.exports = {
     var meta;
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
-      
+       console.log(_date+"\n"+landIndex+"\n"+ newLandOwner+"\n"+ newLandOwnerName+"\n"+ ids+"\n"+mode_of_payment+"\n"+ property_Price+"\n"+ property_for);
+       /* _date = "YES";
+        landIndex = 1;
+        newLandOwner = sender;
+        newLandOwnerName = "RAGHAV";
+        ids = 72626727288282;
+        mode_of_payment = "CASH";
+        property_Price = 100100101;
+        property_for = "SELF";
+        */
         console.log(_date+"\n"+landIndex+"\n"+ newLandOwner+"\n"+ newLandOwnerName+"\n"+ ids+"\n"+mode_of_payment+"\n"+ property_Price+"\n"+ property_for);
         console.log(sender);
         return meta.transferLandTransaction.call(_date, landIndex, newLandOwner, newLandOwnerName, ids,mode_of_payment,property_Price, property_for, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
@@ -188,8 +197,9 @@ module.exports = {
     var meta;
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
-      
-        return meta.validateTransferLandTransaction.call(index, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+      console.log(sender+"\n"+ meta.isValidator.call(sender,{from:sender}));
+        
+        return meta.validateTransferLandTransaction.call(0, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {
@@ -277,7 +287,10 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.getAddLandTransactionsA.call( {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        var x= meta.getAddLandTransactionsA.call( {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        console.log(x);
+        return x;
+        
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {

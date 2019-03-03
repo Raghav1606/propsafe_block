@@ -25,10 +25,30 @@ INITIALIZE_WEIGHTS='random'
 
 # preprocessing
 
+yn = {"true": "0", "false": "1"}
+profile = {"self" : "0", "relatives" : "1", "others" : "2"}
+mode = {"cash" : "0", "cheque":"1"}
+source = {"work experience" : "0", "rental income" : "1", "gift" : "2", "inheritance":"3" , "sale property":"4"}
+
 with open('jobs.txt', 'r') as f:
     x = f.readlines()
 
-x2 = [int(x1.split('\n')[0]) for x1 in x]
+for x1 in x:
+    x1 = x1.split('\n')[0]
+
+
+x[0] = profile[x[0]]
+x[3] = yn[x[3]]
+x[10] = mode[x[10]]
+x[23] = yn[x[23]]
+x[29] = yn[x[29]]
+x[33] = yn[x[33]]
+x[19] = source[x[19]]
+x[20] = source[x[20]]
+x[21] = source[x[21]]
+
+x2 = [int(x1) for x1 in x]
+
 
 shuffled_rows = []
 rows = []

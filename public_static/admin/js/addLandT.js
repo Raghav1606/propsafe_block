@@ -1,4 +1,5 @@
 $(document).ready(() => {
+   
     $('#login').click(() => {
         console.log("Reached");
             
@@ -9,7 +10,7 @@ $(document).ready(() => {
                     var ethu_id = 0;//////////////fetch from database
                     $.get('/getAccounts',{account : ethu_id}, function (res) {
                        // alert("try"+res);
-                        window.location.href = "/validate_opage";
+                        window.location.href = "/createLand";
                     });
                     
                     //window.location.href="/start_trans";

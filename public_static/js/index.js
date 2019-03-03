@@ -29,6 +29,10 @@ $(document).ready(() => {
 
         window.location.href = "/property_history"
     });
+    
+    $('#add_land').click(() => {
 
+        window.location.href = "/addLandT"
+    });
 
 });

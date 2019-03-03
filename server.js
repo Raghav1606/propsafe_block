@@ -15,6 +15,8 @@ app.use('/start_trans', express.static(__dirname + '/public_static/admin/start_t
 app.use('/pending_trans', express.static(__dirname + '/public_static/admin/pending_trans.html'));
 app.use('/validate_or_not', express.static(__dirname + '/public_static/admin/validate_or_not.html'));
 app.use('/validate_opage', express.static(__dirname + '/public_static/admin/validate_or_not.html'));
+app.use('/addLandT', express.static(__dirname + '/public_static/admin/addLandT.html'));
+app.use('/createLand', express.static(__dirname + '/public_static/admin/createLand.html'));
 
 
 
@@ -38,7 +40,8 @@ app.get('/getAccounts', (req, res) => {
  console.log("**** GET /getAccounts lalalalal****");
  let currentAcount = req.query.account;
     console.log(currentAcount+"ACCOUNT");
- truffle_connect.start(currentAcount, (answer) =>{
+
+    truffle_connect.start(currentAcount, (answer) =>{
      
      accounts = answer;
      console.log(accounts);
@@ -51,7 +54,6 @@ app.get('/getAccounts', (req, res) => {
  
     
 });
-
 
 
 
@@ -91,16 +93,21 @@ app.post('/addLandTransaction', (req, res) => {
   console.log("**** Set Transactor val ****");
   console.log(req.body);
     
-  let owner_id = req.body.owner_id;
-  let ownerName = req.body.ownerName;
-  let locality_id = req.body.locality_id;
-  let  current_status = req.body.current_status;
-  let _address = req.body._address;
-  let  area = req.body.area;
+  var owner_id = req.body.owner_id;
+  var ownerName = req.body.ownerName;
+  var locality_id = req.body.locality_id;
+  var current_status = req.body.current_status;
+  var address = req.body._address;
+  var area = req.body.area;
+
   
-  truffle_connect.addLandTransaction(owner_id, ownerName, locality_id, current_status, _address, area, (answer) => {
-    console.log(answer+"OKOKOK");
+  truffle_connect.addLandTransaction(owner_id, ownerName, locality_id, current_status, address, area, (answer) => {
+    console.log(answer+"OKOKOKyfffyyf");
+      
+    truffle_connect.getAddLandTransactionsA( (answer) => {
+        console.log("abc"+answer+"abc");
       res.send(answer);
+    });
   });
 });
 
@@ -111,7 +118,7 @@ app.post('/validateAddLandTransaction', (req, res) => {
   console.log("**** validateAddLandTransaction val ****");
   console.log(req.body);
   let index = req.body.index;
-  truffle_connect.validateAddLandTransaction(index, (answer) => {
+  truffle_connect.validateAddLandTransaction(0, (answer) => {
     console.log(answer+"OKOKOK");
       res.send(answer);
   });
@@ -132,14 +139,13 @@ app.post('/getAddLandTransaction', (req, res) => {
 });
 
 
-
 //transferLandTransaction: function(newOwner,newOwnerName,landIndex, callback)
 
 //_date, landIndex, newLandOwner, newLandOwnerName, ids, 
 
 
 //function transferLandTransaction(string _date, uint landIndex, address newLandOwner,string newLandOwnerName, uint ids, 
-//    string mode_of_payment, uint property_Price, string property_for)
+  //  string mode_of_payment, uint property_Price, string property_for)
 app.post('/transferLandTransaction', (req, res) => {
   console.log("**** transferLandTransaction val ****");
   console.log(req.body);
@@ -152,14 +158,14 @@ app.post('/transferLandTransaction', (req, res) => {
   let mode_of_payment = req.body.mode_of_payment;
   let property_Price = req.body.property_Price;
   let property_for = req.body.property_for;*/
-  let _date = req.body.registraion_date;
-  let newLandOwner = accounts[1];//req.body.buyer_id;
-  let landIndex = 1;
-  let newLandOwnerName = "raghav";
-  let ids = 192836362772;
-  let mode_of_payment = req.body.mode_of_payment;
-  let property_Price = 100000;
-  let property_for = "SELF"; 
+  var _date = req.body.registraion_date;
+  var newLandOwner = accounts[1];//req.body.buyer_id;
+  var landIndex = 1;
+  var newLandOwnerName = "raghav";
+  var ids = 192836362772;
+  var mode_of_payment = req.body.mode_of_payment;
+  var property_Price = 100000;
+  var property_for = "SELF"; 
 
 
   truffle_connect.transferLandTransaction(_date, landIndex, newLandOwner, newLandOwnerName, ids, 

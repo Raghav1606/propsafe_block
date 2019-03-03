@@ -36,7 +36,14 @@ $(document).ready(() => {
             data1.seller_id=$("#Seller_id").val();
             data1.status=$("#Status").val();
             data1.price = $("#price").val();
-
+            
+            $.get( "/api/validate/validate_trans", data1 ).done(function( data ) {
+                                    
+                                    
+                    window.location.href="/validate_page"+"&data="+data;
+                                    
+            });
+        /*
             $.ajax({
                         url: '/api/transactions/addNewTrans',
 
@@ -46,21 +53,16 @@ $(document).ready(() => {
                     if(res === "success")
                     {
                            
-                            $.post( "/transferLandTransaction", data1 ).done(function( data ) {
+                           /* $.post( "/transferLandTransaction", data1 ).done(function( data ) {
                                     
                                     
-                                    window.location.href="/";
+                                    window.location.href="/validate_opage";
                                     
                                 });
-                            /*
-                            $.get( "/api/validate/validate_trans", data1 ).done(function( data ) {
+                            
+                            
                                     
-                                    
-                                    window.location.href="/validate_page"+"&data="+data;
-                                    
-                                });*/
-                                    
-                    }
+                    }*/
                         // console.log(msg);
                         // if (msg === "Succesful Login") {
                         //     console.log(data);
@@ -71,7 +73,7 @@ $(document).ready(() => {
                         //     console.log("could not add the rows right now")
                         //     window.location.href="/start_trans"
                         // }
-                    });
+                  //  });
                 
 
         });

@@ -25388,8 +25388,8 @@
       "links": {
         "ConvertLib": "0x7d0b5769377fd56672FC23b3C8705D21c87D36C9"
       },
-      "address": "0x626894769DDe44e0648E3d7Dc041e5157D02a8Cb",
-      "transactionHash": "0x1090986093ac719656cdb76caa45f74816a6126f49c67538f7d525448aff4402"
+      "address": "0xa3bDD43d761A7BA6Ab533B599116F0DfC6ade190",
+      "transactionHash": "0x5f9094870a1b08058eb57666b72c0629c0c8daff14866b558827ef53f825e2d2"
     },
     "4447": {
       "events": {},
@@ -25399,7 +25399,7 @@
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-03-03T00:19:29.790Z",
+  "updatedAt": "2019-03-03T03:00:24.581Z",
   "devdoc": {
     "methods": {}
   },
