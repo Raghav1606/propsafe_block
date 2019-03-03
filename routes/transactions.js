@@ -110,6 +110,13 @@ route.get('/landPending', (req, res) => {
 });
 
 
+route.get('/record', (req, res) => {
+    db.query("SELECT * FROM transaction_master where status='validated';").then((gates) => {
+        console.log("Regno");
+        console.log(gates[0]);
+        res.send(gates[0]);
+    })
+});
 
 
 module.exports = route;

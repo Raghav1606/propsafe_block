@@ -1,4 +1,5 @@
-failure
+SUSPICIOUS TRANSACTION
 #Kindly enquire about who is getting the property?
+#Kindly check why the property is being sold at a high price
 #Please check that the value of current prop of buyer is v.low compared to the prop he is purchasing
 #Please check that the amount of loan taken is low compared to the property price

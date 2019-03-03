@@ -18,7 +18,7 @@ long long int totalPriceOfAllPropertiesOfBuyer = 60000000; // in INR
 int pricePerSquareFeetOfPropertyAreaOfCurrentProperty; // the prop where the buyer is currently staying
 int propertyAreaOfCurrentProperty;
 bool isLoanTaken = true;
-string loanLender= "bank";
+string loanLender;
 int rateOfInterest;
 long long int loanTaken; // The amount approved for the loan
 
@@ -139,7 +139,7 @@ void checkBuyerWhenLoanTaken()
         analysisMessage.push_back(message);
     }
     else{
-        if(loanLender == "others"){
+        if(loanLender == "1"){
             string message = "#Please check the source of Loan";
             analysisMessage.push_back(message);
         }
@@ -224,13 +224,13 @@ int main()
         checkPanDetailsInNoLoanCase();
     }
     if(analysisMessage.size()==0){
-        cout<<"Success"<<endl;
+        cout<<"Success\n";
     }
     else{
-        cout<<"failure"<<endl;
+        cout<<"SUSPICIOUS TRANSACTION\n";
         for(int i=0;i<analysisMessage.size();i++)
         {
-            cout<<analysisMessage[i]<<endl;
+            cout<<analysisMessage[i]<<"\n";
         }
     }
     
