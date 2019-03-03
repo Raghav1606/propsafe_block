@@ -1,5 +1,31 @@
 
 $(document).ready(() => {
+    
+    $.get('/api/transactions/prop_history',function(res){
+        console.log("props"+res);
+        let x="";
+        x+="<tr><th> registration_no </th>"
+                +"<th> owner_id </th>"
+                +"<th> owner_name </th>"
+                +"<th> locality_id </th>"
+                +"<th> current_status </th>"
+                +"<th> address </th>"
+                +"<th> area </th>"
+                +"<th> status </th></tr>";
+        for(let i=0;i<res.length;i++)
+            {
+                x+="<tr><td>"+res[i].registration_no+"</td>"
+                +"<td>"+res[i].owner_id+"</td>"
+                +"<td>"+res[i].owner_name+"</td>"
+                +"<td>"+res[i].locality_id+"</td>"
+                +"<td>"+res[i].current_status+"</td>"
+                +"<td>"+res[i].address+"</td>"
+                +"<td>"+res[i].area+"</td>"
+                +"<td>"+res[i].status+"</td></tr>";
+            }
+        
+                document.getElementById("table_1").innerHTML=x;
+    });
 
     function readCookie(name) {
         let i, c, ca, nameEQ = name + "=";

@@ -34,5 +34,10 @@ $(document).ready(() => {
 
         window.location.href = "/addLandT"
     });
+    
+    $('#record_old').click(() => {
+
+        window.location.href = "/record_old"
+    });
 
 });

@@ -18,6 +18,9 @@ app.use('/validate_opage', express.static(__dirname + '/public_static/admin/vali
 app.use('/addLandT', express.static(__dirname + '/public_static/admin/addLandT.html'));
 app.use('/createLand', express.static(__dirname + '/public_static/admin/createLand.html'));
 
+app.use('/property_history', express.static(__dirname + '/public_static/admin/property_history.html'));
+app.use('/record_old', express.static(__dirname + '/public_static/admin/record_old.html'));
+
 
 
 const port = 4000 || process.env.PORT;

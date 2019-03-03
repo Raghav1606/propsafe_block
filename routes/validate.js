@@ -133,17 +133,23 @@ route.get('/validate_trans', (req, res) => {
     // node couldn't execute the command
                                             return;
                                     }
-                                        fs.readFile('output.txt', 'utf-8', (err, data) => {
+                                        fs.readFile('routes/output.txt', 'utf-8', (err, data) => {
                                     if (err) throw err;
 
                                     // Converting Raw Buffer to text
                                     // data using tostring function.
                                     fs.readFile('file1.txt','utf-8',(err,data11)=>{
-                                        data+="\n";
-                                        data+=data11;
-                                    })
-                                    console.log(data);
+                                        console.log("data11="+data11);
+                                        console.log("data="+data);
+                                    
+                                        if(data === "0" && data11== "Success")
+                                            data="VALID TRANSACTION\n";
+                                        else
+                                            data = data11;
+                                        console.log(data);
                                     res.send(data);
+                                    
+                                    })
                                     
                                 })
                                         
