@@ -16,14 +16,10 @@ $(document).ready(() => {
         return '';
     }
 
-    console.log(readCookie("govt"));
+    //console.log(readCookie("govt"));
     
-   /* if(readCookie("govt")=='')
-    {
-        window.location.href = "/login_govt_official";
-    }
-    else {*/
-        $('#submit').click(() => {
+
+    $('#submit').click(() => {
 
             console.log("HEY submit create trans");
 
@@ -39,24 +35,32 @@ $(document).ready(() => {
             data1.mode_of_payment=$("#Mode_of_payment").val();
             data1.seller_id=$("#Seller_id").val();
             data1.status=$("#Status").val();
+            data1.price = $("#price").val();
 
-            alert(data1);
             $.ajax({
                         url: '/api/transactions/addNewTrans',
 
                         data: data1,
                         method: 'GET'
-                    }).done(function (msg) {
-                        if(msg==="success")
-                        {
+                    }).done(function (res) {
+                    if(res === "success")
+                    {
+                           
+                            $.post( "/transferLandTransaction", data1 ).done(function( data ) {
+                                    
+                                    
+                                    window.location.href="/";
+                                    
+                                });
+                            /*
                             $.get( "/api/validate/validate_trans", data1 ).done(function( data ) {
                                     
                                     
                                     window.location.href="/validate_page"+"&data="+data;
                                     
-                                });
+                                });*/
                                     
-                        }
+                    }
                         // console.log(msg);
                         // if (msg === "Succesful Login") {
                         //     console.log(data);
@@ -67,26 +71,9 @@ $(document).ready(() => {
                         //     console.log("could not add the rows right now")
                         //     window.location.href="/start_trans"
                         // }
-                    })
+                    });
                 
 
-            // $.ajax({
-            //     url: "/api/validate/validate_trans",
-            //     type: "get",
-            //     data: {
-            //         registration_no: $('#registration_no').val(),
-            //        
-            //     },
-            //     success: function(response) {
-            //         //Do Something
-            //         console.log(response);
-            //        // window.location.href = "/validated_or_not";
-            //     },
-            //     error: function(xhr) {
-            //         throw xhr;
-            //     }
-            // });
-           //
         });
-   // }
+
 });

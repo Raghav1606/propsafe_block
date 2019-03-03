@@ -225,9 +225,9 @@ contract MetaCoin {
     {
         
         TransferLandTransaction memory txn;
-        Land x = lands[landIndex];
+        //Land x = lands[landIndex];
         
-        /*txn.registration_number = transferLandTransactions.length;
+        txn.registration_number = transferLandTransactions.length;
         txn. property_id = ids%1000;
         ids = ids/1000;
         txn.deed_id = ids%1000;
@@ -244,13 +244,13 @@ contract MetaCoin {
         txn.newLandOwner = newLandOwner;
         txn.newLandOwnerName = newLandOwnerName;
         txn.mode_of_payment = mode_of_payment;
-        txn.landOwnerSeller = x.owner_id;
+        txn.landOwnerSeller = 334455665;//x.owner_id;
         txn.status = "Pending";
         txn.property_Price =  property_Price;
         txn.property_for =  property_for;
         txn.createdBy =  msg.sender;
         txn.validators =  new address[](0);
-        */
+        
         
         transferLandTransactions.push(txn);
     }

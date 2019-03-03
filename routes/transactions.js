@@ -52,10 +52,10 @@ route.get('/viewAllLocalityId', (req, res) => {
 });
 
 route.get('/addNewTrans', (req, res) => {
-	console.log(req);
+	console.log(req.query);
     db.query("INSERT into transaction_master values('"+req.query.registraion_no+"','"+req.query.registraion_date+"','123','123','123','"+req.query.property_id+"','"+req.query.deed_id+
 	"','123','"+req.query.sro_office+"','"+req.query.locality_id+"','"+req.query.book_no+"','"+req.query.mode_of_payment+"','"+
-	req.query.buyer_id+"','"+req.query.status+"','self',20000)").then((gates) => {
+	req.query.buyer_id+"','"+req.query.status+"','self',"+req.query.price+");").then((gates) => {
          res.send("success");
     })
 });

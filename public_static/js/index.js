@@ -19,8 +19,10 @@ $(document).ready(() => {
     });
 
     $('#pending_trans').click(() => {
-
-        window.location.href = "/pending_trans"
+        
+        
+        window.location.href = "/pending_trans";
+        
     });
 
     $('#property_history').click(() => {

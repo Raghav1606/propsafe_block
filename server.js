@@ -136,19 +136,30 @@ app.post('/getAddLandTransaction', (req, res) => {
 //transferLandTransaction: function(newOwner,newOwnerName,landIndex, callback)
 
 //_date, landIndex, newLandOwner, newLandOwnerName, ids, 
-    
+
+
+//function transferLandTransaction(string _date, uint landIndex, address newLandOwner,string newLandOwnerName, uint ids, 
+//    string mode_of_payment, uint property_Price, string property_for)
 app.post('/transferLandTransaction', (req, res) => {
   console.log("**** transferLandTransaction val ****");
   console.log(req.body);
-    
+    /*
   let _date = req.body._date;
   let newLandOwner = req.body.newLandOwner;
   let landIndex = req.body.landIndex;
-    let newLandOwnerName = req.body.newLandOwnerName;
-      let ids = req.body.ids;
+  let newLandOwnerName = req.body.newLandOwnerName;
+  let ids = req.body.ids;
   let mode_of_payment = req.body.mode_of_payment;
   let property_Price = req.body.property_Price;
-  let property_for = req.body.property_for;
+  let property_for = req.body.property_for;*/
+  let _date = req.body.registraion_date;
+  let newLandOwner = accounts[1];//req.body.buyer_id;
+  let landIndex = 1;
+  let newLandOwnerName = "raghav";
+  let ids = 192836362772;
+  let mode_of_payment = req.body.mode_of_payment;
+  let property_Price = 100000;
+  let property_for = "SELF"; 
 
 
   truffle_connect.transferLandTransaction(_date, landIndex, newLandOwner, newLandOwnerName, ids, 

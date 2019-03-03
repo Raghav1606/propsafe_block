@@ -3,7 +3,7 @@ const contract = require('truffle-contract');
 const metacoin_artifact = require('../build/contracts/MetaCoin.json'); // connects with metacoin.sol
 var MetaCoin = contract(metacoin_artifact); //metacoin is a variable of this
 
-var sender;
+var sender = 17171991001010;
 
 //connect hote hi accounts aajate hai using this
 module.exports = {
@@ -150,7 +150,8 @@ module.exports = {
     });
   },
     
-    // function transferLandTransaction(address _newLandOwner, string memory _newLandOwnerName, uint _landIndex) 
+//function transferLandTransaction(string _date, uint landIndex, address newLandOwner,string newLandOwnerName, uint ids, 
+//    string mode_of_payment, uint property_Price, string property_for)
     
     transferLandTransaction: function(_date, landIndex, newLandOwner, newLandOwnerName, ids, 
      mode_of_payment, property_Price, property_for, callback) { //gets the selected account 
@@ -163,8 +164,9 @@ module.exports = {
     MetaCoin.deployed().then(function(instance) {  /// Metacoin.deployed ????
       meta = instance;
       
-        return meta.transferLandTransaction.call(date, landIndex, newLandOwner, newLandOwnerName, ids, 
-     mode_of_payment, property_Price, property_for, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
+        console.log(_date+"\n"+landIndex+"\n"+ newLandOwner+"\n"+ newLandOwnerName+"\n"+ ids+"\n"+mode_of_payment+"\n"+ property_Price+"\n"+ property_for);
+        console.log(sender);
+        return meta.transferLandTransaction.call(_date, landIndex, newLandOwner, newLandOwnerName, ids,mode_of_payment,property_Price, property_for, {from: sender});    ///meta.getbalance calls Metacoin.sol and gets balance ..... {from :account ???}
     }).then(function(value) {   //useless lines
         callback(value.valueOf());
     }).catch(function(e) {

@@ -454,8 +454,8 @@
     "666": {
       "events": {},
       "links": {},
-      "address": "0xd3d39aD88451F313e66C6f870D72843E293dc005",
-      "transactionHash": "0xa4c147588fb90da6457caac78b1c2de85c674c03ffcb2bae8f801577033cb2a2"
+      "address": "0xbA4562F613B6D61AE098eA5192CCF732E795715c",
+      "transactionHash": "0x0415309b6c79d8af35f3328d4c9fc477cfd58c83f63dc80ce05e0d6ff1d5cbb5"
     },
     "4447": {
       "events": {},
@@ -465,7 +465,7 @@
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-03-02T18:12:05.127Z",
+  "updatedAt": "2019-03-03T00:19:29.778Z",
   "devdoc": {
     "methods": {}
   },
